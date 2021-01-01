@@ -97,5 +97,6 @@ func main() {
   //End timer and print result
   t := time.Now()
   elapsed := t.Sub(start)
+  fmt.Printf("\n")
   fmt.Println(elapsed)
 }
