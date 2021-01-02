@@ -41,6 +41,6 @@ func main(){
       panic("unable to Accept connection")
     }
 
-    go handle(conn, "192.168.1.254:80")
+    go handle(conn, "mc.hypixel.net:25565")
   }
 }
