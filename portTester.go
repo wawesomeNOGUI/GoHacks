@@ -12,10 +12,10 @@ import (
   "time"
 )
 
-func worker(ports, results chan int) {
+func worker(ports, results chan int, addr string) {
 	for p := range ports {
 		//address := fmt.Sprintf("scanme.nmap.org:%d", p)
-    address := fmt.Sprintf("162.200.58.171:%d", p)
+    address := fmt.Sprintf(addr +":%d", p)
 		conn, err := net.Dial("tcp", address)
 		if err != nil {
 			results <- 0
@@ -63,11 +63,15 @@ func main() {
       panic(err)
     }
 
+
+	fmt.Println("What Address Do you want to scan? (Enter IPv4, IPv6, or Domain Name)")
+	var target = MustReadStdin()
+
   //For timing the program
   start := time.Now()
 
 	for i := 0; i < cap(ports); i++ {
-		go worker(ports, results)
+		go worker(ports, results, target)
 	}
 
 	go func() {
